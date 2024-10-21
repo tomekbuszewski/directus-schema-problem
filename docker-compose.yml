@@ -1,0 +1,52 @@
+services:
+  directus_1:
+    container_name: directus_1
+    build:
+      context: .
+      dockerfile: ./directus_1/Dockerfile
+    volumes:
+      - ./directus_1/database:/directus/database
+      - ./directus_1/uploads:/directus/uploads
+      - ./directus_1/extensions:/directus/extensions
+      - ./directus_1/schema-sync:/directus/schema-sync
+    ports:
+      - "3333:8055"
+    environment:
+      CORS_ENABLED: "true"
+      CORS_METHODS: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+      CORS_ORIGIN: "*"
+      CORS_ALLOWED_HEADERS: "Authorization, Content-Type, Range, X-Requested-With"
+      CORS_CREDENTIALS: "false"
+      SECRET: "secret-1"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "vWBfW-G3Jodt"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      WEBSOCKETS_ENABLED: "true"
+      MARKETPLACE_TRUST: "all"
+
+  directus_2:
+    container_name: directus_2
+    build:
+      context: .
+      dockerfile: ./directus_2/Dockerfile
+    volumes:
+      - ./directus_2/database:/directus/database
+      - ./directus_2/uploads:/directus/uploads
+      - ./directus_2/extensions:/directus/extensions
+      - ./directus_2/schema-sync:/directus/schema-sync
+    ports:
+      - "4444:8055"
+    environment:
+      CORS_ENABLED: "true"
+      CORS_METHODS: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+      CORS_ORIGIN: "*"
+      CORS_ALLOWED_HEADERS: "Authorization, Content-Type, Range, X-Requested-With"
+      CORS_CREDENTIALS: "false"
+      SECRET: "secret-2"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "vWBfW-G3Jodt"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      WEBSOCKETS_ENABLED: "true"
+      MARKETPLACE_TRUST: "all"

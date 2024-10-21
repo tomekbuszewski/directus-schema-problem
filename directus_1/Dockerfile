@@ -1,0 +1,10 @@
+FROM directus/directus:11.1.1
+
+USER root
+RUN corepack enable
+USER node
+
+# Workaround to be able to install extensions with 'node' user, only required in v11.1.1
+RUN rm node_modules/.modules.yaml
+
+RUN pnpm install directus-extension-schema-sync
